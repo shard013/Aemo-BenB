@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
@@ -39,7 +39,7 @@ steps:
     command: 'publish'
     projects: '**/Aemo-BenB.csproj'
     publishWebProjects: false
-    arguments: '-p:PublishSingleFile=true --self-contained true --no-build --output $(Build.ArtifactStagingDirectory)/Aemo-BenB'
+    arguments: '--no-build --output $(Build.ArtifactStagingDirectory)/Aemo-BenB'
     zipAfterPublish: true
 
 - publish: '$(Build.ArtifactStagingDirectory)/Aemo-BenB/'
