@@ -42,6 +42,6 @@ steps:
     arguments: '-p:PublishSingleFile=true --self-contained true --no-build --output $(Build.ArtifactStagingDirectory)/Aemo-BenB'
     zipAfterPublish: true
 
-- publish: '$(Build.SourcesDirectory)/Aemo-BenB'
+- publish: '$(Build.ArtifactStagingDirectory)/Aemo-BenB/'
   displayName: 'Publish source'
   artifact: Aemo-BenB
