@@ -18,28 +18,30 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
+  displayName: 'NuGet Restore'
   inputs:
     restoreSolution: '$(solution)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build'
+  displayName: 'dotnet build'
   inputs:
     command: 'build'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Run tests'
+  displayName: 'dotnet test'
   inputs:
     command: 'test'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Publish'
+  displayName: 'dotnet publish'
   inputs:
     command: 'publish'
     projects: '**/Aemo-BenB.csproj'
     publishWebProjects: false
-    arguments: '-p:PublishSingleFile=true --self-contained true --no-build'
+    arguments: '-p:PublishSingleFile=true --self-contained true --no-build --output $(Build.ArtifactStagingDirectory)/Aemo-BenB'
     zipAfterPublish: true
 
-- publish: '$(Build.SourcesDirectory)/Aemo-BenB/Aemo-BenB'
+- publish: '$(Build.SourcesDirectory)/Aemo-BenB'
+  displayName: 'Publish source'
   artifact: Aemo-BenB
