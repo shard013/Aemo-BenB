@@ -22,20 +22,23 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
     command: 'build'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Run tests'
   inputs:
     command: 'test'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Publish'
   inputs:
     command: 'publish'
     projects: '**/Aemo-BenB.csproj'
     publishWebProjects: false
-    arguments: '-p:PublishSingleFile=true --self-contained true -r linux-x64 --output $(Build.ArtifactStagingDirectory)/Aemo-BenB --no-build'
+    arguments: '-p:PublishSingleFile=true --self-contained true --no-build'
     zipAfterPublish: true
 
 - publish: '$(Build.SourcesDirectory)/Aemo-BenB/Aemo-BenB'
